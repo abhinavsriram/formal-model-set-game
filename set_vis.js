@@ -88,6 +88,7 @@ function loadCards() {
     cardsDiv.style.overflow = "scroll"
     cardsDiv.style.width = "500px"
     cardsDiv.style.height = "300px"
+    cardsDiv.style.border = "thick solid black"
     for (const ind in cards.tuples()) {
         const card = cards.tuples()[ind]
         const cardShape = card.join(shape).toString().slice(0,-1)
