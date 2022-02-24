@@ -1,6 +1,5 @@
 #lang forge/bsl "cm" "a6y73n2lxfy9zgai@gmail.com"
 
-// abstract sig Characterestic {}
 abstract sig Shape {}
 abstract sig Color {}
 abstract sig Num {}
@@ -78,105 +77,106 @@ pred GenerateValidSet {
     }
 }
 
-// example validOnlineGame is ValidDeck and GenerateValidSet for {
-//     SetCard = `S1 + `S2 + `S3 + `S4 + `S5 + `S6 + `S7 + `S8 + `S9 + `S10 + `S11 + `S12
-//     Diamond = `DIAMOND
-//     Squiggle = `SQUIGGLE
-//     Oval = `OVAL
-//     Shape = Diamond + Squiggle + Oval
-//     Red = `RED
-//     Purple = `PURPLE
-//     Green = `GREEN
-//     Color = Red + Purple + Green
-//     One = `ONE
-//     Two = `TWO
-//     Three = `THREE
-//     Num = One + Two + Three
-//     Solid = `SOLID
-//     Striped = `STRIPED
-//     Outline = `OUTLINE
-//     Shading = Solid + Striped + Outline
-//     shape = 
-//     `S1 -> `DIAMOND +
-//     `S2 -> `SQUIGGLE +
-//     `S3 -> `SQUIGGLE +
-//     `S4 -> `OVAL +
-//     `S5 -> `OVAL +
-//     `S6 -> `DIAMOND +
-//     `S7 -> `DIAMOND +
-//     `S8 -> `SQUIGGLE +
-//     `S9 -> `DIAMOND +
-//     `S10 -> `OVAL +
-//     `S11 -> `SQUIGGLE + 
-//     `S12 -> `DIAMOND
-//     color =
-//     `S1 -> `RED +
-//     `S2 -> `RED +
-//     `S3 -> `GREEN +
-//     `S4 -> `RED +
-//     `S5 -> `RED +
-//     `S6 -> `PURPLE +
-//     `S7 -> `GREEN +
-//     `S8 -> `PURPLE +
-//     `S9 -> `RED +
-//     `S10 -> `PURPLE +
-//     `S11 -> `PURPLE + 
-//     `S12 -> `RED
-//     num =
-//     `S1 -> `ONE +
-//     `S2 -> `THREE +
-//     `S3 -> `TWO +
-//     `S4 -> `TWO +
-//     `S5 -> `THREE +
-//     `S6 -> `THREE +
-//     `S7 -> `TWO +
-//     `S8 -> `TWO +
-//     `S9 -> `TWO +
-//     `S10 -> `THREE +
-//     `S11 -> `ONE + 
-//     `S12 -> `ONE
-//     shading =
-//     `S1 -> `STRIPED +
-//     `S2 -> `OUTLINE +
-//     `S3 -> `STRIPED +
-//     `S4 -> `OUTLINE +
-//     `S5 -> `SOLID +
-//     `S6 -> `SOLID +
-//     `S7 -> `OUTLINE +
-//     `S8 -> `OUTLINE +
-//     `S9 -> `OUTLINE +
-//     `S10 -> `STRIPED +
-//     `S11 -> `SOLID + 
-//     `S12 -> `OUTLINE
-//     Set = `SET1 + `SET2 + `SET3 + `SET4 + `SET5 + `SET6 
-//     card1 =
-//     `SET1 -> `S1 +
-//     `SET2 -> `S1 +
-//     `SET3 -> `S1 +
-//     `SET4 -> `S2 +
-//     `SET5 -> `S2 +
-//     `SET6 -> `S4
-//     card2 =
-//     `SET1 -> `S3 +
-//     `SET2 -> `S5 +
-//     `SET3 -> `S6 +
-//     `SET4 -> `S3 +
-//     `SET5 -> `S4 +
-//     `SET6 -> `S7
-//     card3 =
-//     `SET1 -> `S10 +
-//     `SET2 -> `S9 +
-//     `SET3 -> `S7 +
-//     `SET4 -> `S11 +
-//     `SET5 -> `S12 +
-//     `SET6 -> `S8
-// }
+example validOnlineGame is ValidDeck and GenerateValidSet for {
+    SetCard = `CARD1 + `CARD2 + `CARD3 + `CARD4 + `CARD5 + `CARD6 + `CARD7 + `CARD8 + `CARD9 + `CARD10 + `CARD11 + `CARD12
+    Diamond = `DIAMOND
+    Squiggle = `SQUIGGLE
+    Oval = `OVAL
+    Shape = Diamond + Squiggle + Oval
+    Red = `RED
+    Purple = `PURPLE
+    Green = `GREEN
+    Color = Red + Purple + Green
+    One = `ONE
+    Two = `TWO
+    Three = `THREE
+    Num = One + Two + Three
+    Solid = `SOLID
+    Striped = `STRIPED
+    Outline = `OUTLINE
+    Shading = Solid + Striped + Outline
+    shape = 
+    `CARD1 -> `DIAMOND +
+    `CARD2 -> `SQUIGGLE +
+    `CARD3 -> `SQUIGGLE +
+    `CARD4 -> `OVAL +
+    `CARD5 -> `DIAMOND +
+    `CARD6 -> `DIAMOND +
+    `CARD7 -> `DIAMOND +
+    `CARD8 -> `SQUIGGLE +
+    `CARD9 -> `DIAMOND +
+    `CARD10 -> `OVAL +
+    `CARD11 -> `SQUIGGLE + 
+    `CARD12 -> `DIAMOND
+    color =
+    `CARD1 -> `RED +
+    `CARD2 -> `RED +
+    `CARD3 -> `GREEN +
+    `CARD4 -> `RED +
+    `CARD5 -> `RED +
+    `CARD6 -> `PURPLE +
+    `CARD7 -> `GREEN +
+    `CARD8 -> `PURPLE +
+    `CARD9 -> `RED +
+    `CARD10 -> `PURPLE +
+    `CARD11 -> `PURPLE + 
+    `CARD12 -> `RED
+    num =
+    `CARD1 -> `ONE +
+    `CARD2 -> `THREE +
+    `CARD3 -> `TWO +
+    `CARD4 -> `TWO +
+    `CARD5 -> `THREE +
+    `CARD6 -> `THREE +
+    `CARD7 -> `TWO +
+    `CARD8 -> `TWO +
+    `CARD9 -> `TWO +
+    `CARD10 -> `THREE +
+    `CARD11 -> `ONE + 
+    `CARD12 -> `ONE
+    shading =
+    `CARD1 -> `STRIPED +
+    `CARD2 -> `OUTLINE +
+    `CARD3 -> `STRIPED +
+    `CARD4 -> `OUTLINE +
+    `CARD5 -> `SOLID +
+    `CARD6 -> `SOLID +
+    `CARD7 -> `OUTLINE +
+    `CARD8 -> `OUTLINE +
+    `CARD9 -> `OUTLINE +
+    `CARD10 -> `STRIPED +
+    `CARD11 -> `SOLID + 
+    `CARD12 -> `OUTLINE
+    Set = `SET1 + `SET2 + `SET3 + `SET4 + `SET5 + `SET6 
+    card1 =
+    `SET1 -> `CARD1 +
+    `SET2 -> `CARD1 +
+    `SET3 -> `CARD1 +
+    `SET4 -> `CARD2 +
+    `SET5 -> `CARD2 +
+    `SET6 -> `CARD4
+    card2 =
+    `SET1 -> `CARD3 +
+    `SET2 -> `CARD5 +
+    `SET3 -> `CARD6 +
+    `SET4 -> `CARD3 +
+    `SET5 -> `CARD4 +
+    `SET6 -> `CARD7
+    card3 =
+    `SET1 -> `CARD10 +
+    `SET2 -> `CARD9 +
+    `SET3 -> `CARD7 +
+    `SET4 -> `CARD11 +
+    `SET5 -> `CARD12 +
+    `SET6 -> `CARD8
+}
 
 // produces a valid deck of cards
-run {
-    ValidDeck
-} for exactly 82 SetCard
+// run {
+//     ValidDeck
+// } for exactly 0 Set, exactly 81 SetCard
 
+// produces a valid deck for online version of set
 // run {
 //     ValidDeck
 //     GenerateValidSet
