@@ -86,7 +86,7 @@ function loadCards() {
     cardsDiv.style['flex-direction'] = "row"
     cardsDiv.style['flex-wrap'] = "wrap"
     cardsDiv.style.overflow = "scroll"
-    cardsDiv.style.width = "500px"
+    cardsDiv.style.width = "370px"
     cardsDiv.style.height = "300px"
     cardsDiv.style.border = "thick solid black"
     cardsDiv.style.margin = "5px"
