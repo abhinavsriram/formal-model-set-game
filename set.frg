@@ -172,9 +172,9 @@ example validOnlineGame is ValidDeck and GenerateValidSet for {
 }
 
 // produces a valid deck of cards
-// run {
-//     ValidDeck
-// } for exactly 0 Set, exactly 81 SetCard
+run {
+    ValidDeck
+} for exactly 0 Set, exactly 81 SetCard
 
 // produces a valid deck for online version of set
 // run {
