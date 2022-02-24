@@ -81,6 +81,13 @@ function convStrToInNum(n) {
 
 function loadCards() {
     const cards = SetCard
+    cardsDiv = document.createElement("div")
+    cardsDiv.style.display = "flex"
+    cardsDiv.style['flex-direction'] = "row"
+    cardsDiv.style['flex-wrap'] = "wrap"
+    cardsDiv.style.overflow = "scroll"
+    cardsDiv.style.width = "500px"
+    cardsDiv.style.height = "300px"
     for (const ind in cards.tuples()) {
         const card = cards.tuples()[ind]
         const cardShape = card.join(shape).toString().slice(0,-1)
@@ -92,13 +99,9 @@ function loadCards() {
         for (let i = 0; i < cardNum; i++) {
             newCard.append(makeShape(cardShape, cardColor, cardShading))
         }
-        div.append(newCard)
+        cardsDiv.append(newCard)
     }
+    div.append(cardsDiv)
 }
-div.style.display = "flex"
-div.style['flex-direction'] = "row"
-div.style['flex-wrap'] = "wrap"
-div.style.overflow = "scroll"
 div.replaceChildren()
-console.log("HELOOOOOOOOOOOO")
 loadCards()
