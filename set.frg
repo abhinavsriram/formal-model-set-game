@@ -28,7 +28,7 @@ sig SetCard {
     shading: one Shading
 }
 
-sig Set {
+sig SetSet {
     card1: one SetCard,
     card2: one SetCard,
     card3: one SetCard
@@ -71,7 +71,7 @@ pred ValidSet[s1: SetCard, s2: SetCard, s3: SetCard] {
 }
 
 pred GenerateValidSet {
-    all s: Set | {
+    all s: SetSet | {
         s.card1 != s.card2 and s.card2 != s.card3 and s.card1 != s.card3 and
         ValidSet[s.card1, s.card2, s.card3]
     }
@@ -147,7 +147,7 @@ example validOnlineGame is ValidDeck and GenerateValidSet for {
     `CARD10 -> `STRIPED +
     `CARD11 -> `SOLID + 
     `CARD12 -> `OUTLINE
-    Set = `SET1 + `SET2 + `SET3 + `SET4 + `SET5 + `SET6 
+    SetSet = `SET1 + `SET2 + `SET3 + `SET4 + `SET5 + `SET6 
     card1 =
     `SET1 -> `CARD1 +
     `SET2 -> `CARD1 +
@@ -172,12 +172,12 @@ example validOnlineGame is ValidDeck and GenerateValidSet for {
 }
 
 // produces a valid deck of cards
-run {
-    ValidDeck
-} for exactly 0 Set, exactly 81 SetCard
-
-// produces a valid deck for online version of set
 // run {
 //     ValidDeck
-//     GenerateValidSet
-// } for exactly 6 Set, exactly 12 SetCard
+// } for exactly 0 SetSet, exactly 81 SetCard
+
+// produces a valid deck for online version of set
+run {
+    ValidDeck
+    GenerateValidSet
+} for exactly 6 SetSet, exactly 12 SetCard

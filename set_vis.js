@@ -89,6 +89,8 @@ function loadCards() {
     cardsDiv.style.width = "500px"
     cardsDiv.style.height = "300px"
     cardsDiv.style.border = "thick solid black"
+    cardsDiv.style.margin = "5px"
+    // cardsDiv.innerHTML = "<h1> All Cards </h1> <br>"
     for (const ind in cards.tuples()) {
         const card = cards.tuples()[ind]
         const cardShape = card.join(shape).toString().slice(0,-1)
@@ -104,5 +106,73 @@ function loadCards() {
     }
     div.append(cardsDiv)
 }
+
+// function extractCardInfo(card) {
+//     return 
+// }
+
+function loadSets() {
+    const cards = SetCard
+    const sets = SetSet
+    setsDiv = document.createElement("div")
+    setsDiv.style.display = "flex"
+    setsDiv.style['flex-direction'] = "column"
+    setsDiv.style.overflow = "scroll"
+    setsDiv.style.width = "500px"
+    setsDiv.style.height = "300px"
+    setsDiv.style.border = "thick solid black"
+    setsDiv.style.margin = "5px"
+    setsDiv.innerHTML = "<h1> Set Solutions </h1>"
+    for (const ind in sets.tuples()) {
+        setDiv = document.createElement("div")
+        setDiv.style.display = "flex"
+        setDiv.style.height = "60px"
+        setDiv.style.width = "270px"
+        setDiv.style['flex-direction'] = "row"
+        setDiv.style.border = "thin solid black"
+        setDiv.style.margin = "5px"
+        // setDiv.innerHTML = "Set " + ind
+        const set = sets.tuples()[ind]
+
+        var card = set.join(card1)
+        var cardShape = card.join(shape).toString().slice(0,-1)
+        var cardColor = card.join(color).toString().slice(0,-1)
+        var cardNum = convStrToInNum(card.join(num).toString().slice(0,-1))
+        var cardShading = card.join(shading).toString().slice(0,-1)
+        
+        newCard = makeCard()
+        for (let i = 0; i < cardNum; i++) {
+            newCard.append(makeShape(cardShape, cardColor, cardShading))
+        }
+        setDiv.append(newCard)
+
+        card = set.join(card2)
+        cardShape = card.join(shape).toString().slice(0,-1)
+        cardColor = card.join(color).toString().slice(0,-1)
+        cardNum = convStrToInNum(card.join(num).toString().slice(0,-1))
+        cardShading = card.join(shading).toString().slice(0,-1)
+        
+        newCard = makeCard()
+        for (let i = 0; i < cardNum; i++) {
+            newCard.append(makeShape(cardShape, cardColor, cardShading))
+        }
+        setDiv.append(newCard)
+        
+        card = set.join(card3)
+        cardShape = card.join(shape).toString().slice(0,-1)
+        cardColor = card.join(color).toString().slice(0,-1)
+        cardNum = convStrToInNum(card.join(num).toString().slice(0,-1))
+        cardShading = card.join(shading).toString().slice(0,-1)
+        
+        newCard = makeCard()
+        for (let i = 0; i < cardNum; i++) {
+            newCard.append(makeShape(cardShape, cardColor, cardShading))
+        }
+        setDiv.append(newCard)
+        setsDiv.append(setDiv)
+    }
+    div.append(setsDiv)
+}
 div.replaceChildren()
 loadCards()
+loadSets()
