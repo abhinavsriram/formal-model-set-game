@@ -56,7 +56,7 @@ function makeSquiggle(color, shading) {
     return e
 }
 
-function makeCard() {
+function makeCardDiv() {
     var card = document.createElement("div")
     card.style.width = "80px"
     card.style.height = "50px"
@@ -93,23 +93,23 @@ function loadCards() {
     // cardsDiv.innerHTML = "<h1> All Cards </h1> <br>"
     for (const ind in cards.tuples()) {
         const card = cards.tuples()[ind]
-        const cardShape = card.join(shape).toString().slice(0,-1)
-        const cardColor = card.join(color).toString().slice(0,-1)
-        const cardNum = convStrToInNum(card.join(num).toString().slice(0,-1))
-        const cardShading = card.join(shading).toString().slice(0,-1)
-        
-        newCard = makeCard()
-        for (let i = 0; i < cardNum; i++) {
-            newCard.append(makeShape(cardShape, cardColor, cardShading))
-        }
-        cardsDiv.append(newCard)
+        cardsDiv.append(makeCard(card))
     }
     div.append(cardsDiv)
 }
 
-// function extractCardInfo(card) {
-//     return 
-// }
+function makeCard(card) {
+    const cardShape = card.join(shape).toString().slice(0,-1)
+    const cardColor = card.join(color).toString().slice(0,-1)
+    const cardNum = convStrToInNum(card.join(num).toString().slice(0,-1))
+    const cardShading = card.join(shading).toString().slice(0,-1)
+        
+    newCard = makeCardDiv()
+    for (let i = 0; i < cardNum; i++) {
+        newCard.append(makeShape(cardShape, cardColor, cardShading))
+    } 
+    return newCard
+}
 
 function loadSets() {
     const cards = SetCard
@@ -133,42 +133,9 @@ function loadSets() {
         setDiv.style.margin = "5px"
         // setDiv.innerHTML = "Set " + ind
         const set = sets.tuples()[ind]
-
-        var card = set.join(card1)
-        var cardShape = card.join(shape).toString().slice(0,-1)
-        var cardColor = card.join(color).toString().slice(0,-1)
-        var cardNum = convStrToInNum(card.join(num).toString().slice(0,-1))
-        var cardShading = card.join(shading).toString().slice(0,-1)
-        
-        newCard = makeCard()
-        for (let i = 0; i < cardNum; i++) {
-            newCard.append(makeShape(cardShape, cardColor, cardShading))
-        }
-        setDiv.append(newCard)
-
-        card = set.join(card2)
-        cardShape = card.join(shape).toString().slice(0,-1)
-        cardColor = card.join(color).toString().slice(0,-1)
-        cardNum = convStrToInNum(card.join(num).toString().slice(0,-1))
-        cardShading = card.join(shading).toString().slice(0,-1)
-        
-        newCard = makeCard()
-        for (let i = 0; i < cardNum; i++) {
-            newCard.append(makeShape(cardShape, cardColor, cardShading))
-        }
-        setDiv.append(newCard)
-        
-        card = set.join(card3)
-        cardShape = card.join(shape).toString().slice(0,-1)
-        cardColor = card.join(color).toString().slice(0,-1)
-        cardNum = convStrToInNum(card.join(num).toString().slice(0,-1))
-        cardShading = card.join(shading).toString().slice(0,-1)
-        
-        newCard = makeCard()
-        for (let i = 0; i < cardNum; i++) {
-            newCard.append(makeShape(cardShape, cardColor, cardShading))
-        }
-        setDiv.append(newCard)
+        setDiv.append(makeCard(set.join(card1)))
+        setDiv.append(makeCard(set.join(card2)))
+        setDiv.append(makeCard(set.join(card3)))
         setsDiv.append(setDiv)
     }
     div.append(setsDiv)
