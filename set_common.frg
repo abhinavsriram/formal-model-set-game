@@ -20,11 +20,17 @@ one sig Solid extends Shading {}
 one sig Striped extends Shading {}
 one sig Outline extends Shading {}
 
+abstract sig Position {}
+one sig OnBoard extends Position {}
+one sig InDeck extends Position {}
+one sig Solved extends Position {}
+
 sig SetCard {
     shape: one Shape,
     color: one Color,
     num: one Num,
-    shading: one Shading
+    shading: one Shading,
+    position: one Position
 }
 
 sig SetSet {
@@ -79,7 +85,7 @@ pred validSet[sc1: SetCard, sc2: SetCard, sc3: SetCard] {
     validShadings[sc1, sc2, sc3]
 }
 
-// ensures all sets are valid
+// ensures all sets are valid and unique
 pred generateValidSet {
     all se: SetSet | {
         se.card1 != se.card2 and se.card2 != se.card3 and se.card1 != se.card3 and
@@ -87,28 +93,55 @@ pred generateValidSet {
     }
 }
 
-// validate that there are 3240 sets in a valid deck
+pred ensureUniqueSets {
+    all disj se1, se2: SetSet| {
+        se1.card1 != se2.card1 and se1.card2 != se2.card2 and se1.card3 != se2.card3
+    }
+}
+
+pred eliminateDuplicateSets {
+    all disj se1, se2: SetSet| {
+        not
+        (
+            (se1.card1 = se2.card1 or se1.card1 = se2.card2 or se1.card1 = se2.card3) and
+            (se1.card2 = se2.card1 or se1.card2 = se2.card2 or se1.card2 = se2.card3) and
+            (se1.card3 = se2.card1 or se1.card3 = se2.card2 or se1.card3 = se2.card3)
+        )
+    }
+}
+
+// validate that there are 1080 unique sets in a valid deck
 // test expect {
 //     {
 //         validDeck
 //         generateValidSet
+//         ensureUniqueSets
+//         eliminateDuplicateSets
+//         all sc: SetCard | {
+//             sc.position = OnBoard
+//         }
 //     }
-//     for exactly 3240 SetSet, exactly 81 SetCard is sat
+//     for exactly 1080 SetSet, exactly 81 SetCard is sat
 // }
 
-// validate that there are no more than 3240 sets in a valid deck
+// validate that there are no more than 1080 unique sets in a valid deck
 // test expect {
 //     {
 //         validDeck
 //         generateValidSet
 //     }
-//     for exactly 3241 SetSet, exactly 81 SetCard is unsat
+//     for exactly 1081 SetSet, exactly 81 SetCard is unsat
 // }
 
 // produces a valid deck of cards
 // no forced guarantee that there are any sets
-// however, by nature of the game, there are 1080 unique sets or 3240 sets in a valid deck
+// however, by nature of the game, there are 1080 unique sets in a valid deck
 // run {
 //     validDeck
 //     generateValidSet
-// } for exactly 3240 SetSet, exactly 81 SetCard
+//     ensureUniqueSets
+//     eliminateDuplicateSets
+//     all sc: SetCard | {
+//         sc.position = OnBoard
+//     }
+// } for exactly 1080 SetSet, exactly 81 SetCard

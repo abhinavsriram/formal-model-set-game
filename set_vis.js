@@ -118,7 +118,7 @@ function loadSets() {
     setsDiv.style.display = "flex"
     setsDiv.style['flex-direction'] = "column"
     setsDiv.style.overflow = "scroll"
-    setsDiv.style.width = "500px"
+    setsDiv.style.width = "370px"
     setsDiv.style.height = "300px"
     setsDiv.style.border = "thick solid black"
     setsDiv.style.margin = "5px"
