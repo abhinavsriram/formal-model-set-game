@@ -27,7 +27,7 @@ sig SetCard {
     shading: one Shading
 }
 
-sig Set {
+sig SetSet {
     card1: one SetCard,
     card2: one SetCard,
     card3: one SetCard
@@ -81,7 +81,7 @@ pred validSet[sc1: SetCard, sc2: SetCard, sc3: SetCard] {
 
 // ensures all sets are valid
 pred generateValidSet {
-    all se: Set | {
+    all se: SetSet | {
         se.card1 != se.card2 and se.card2 != se.card3 and se.card1 != se.card3 and
         validSet[se.card1, se.card2, se.card3]
     }
@@ -93,7 +93,7 @@ pred generateValidSet {
 //         validDeck
 //         generateValidSet
 //     }
-//     for exactly 3240 Set, exactly 81 SetCard is sat
+//     for exactly 3240 SetSet, exactly 81 SetCard is sat
 // }
 
 // validate that there are no more than 3240 sets in a valid deck
@@ -102,7 +102,7 @@ pred generateValidSet {
 //         validDeck
 //         generateValidSet
 //     }
-//     for exactly 3241 Set, exactly 81 SetCard is unsat
+//     for exactly 3241 SetSet, exactly 81 SetCard is unsat
 // }
 
 // produces a valid deck of cards
@@ -111,4 +111,4 @@ pred generateValidSet {
 // run {
 //     validDeck
 //     generateValidSet
-// } for exactly 3240 Set, exactly 81 SetCard
+// } for exactly 3240 SetSet, exactly 81 SetCard

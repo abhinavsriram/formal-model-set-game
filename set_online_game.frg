@@ -14,4 +14,4 @@ pred generateValidOnlineGame {
 // the same card may be present in multiple sets
 run {
     generateValidOnlineGame
-} for exactly 6 Set, exactly 12 SetCard
+} for exactly 6 SetSet, exactly 12 SetCard

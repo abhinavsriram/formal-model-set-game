@@ -36,4 +36,4 @@ pred generateInitState {
 run {
     wellFormedState
     generateInitState
-} for 6 Set, exactly 12 SetCard
+} for 6 SetSet, exactly 12 SetCard

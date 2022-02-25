@@ -73,7 +73,7 @@ example validOnlineGame is generateValidOnlineGame for {
     `CARD10 -> `STRIPED +
     `CARD11 -> `SOLID + 
     `CARD12 -> `OUTLINE
-    Set = `SET1 + `SET2 + `SET3 + `SET4 + `SET5 + `SET6 
+    SetSet = `SET1 + `SET2 + `SET3 + `SET4 + `SET5 + `SET6 
     card1 =
     `SET1 -> `CARD1 +
     `SET2 -> `CARD1 +
