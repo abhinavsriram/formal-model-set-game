@@ -104,12 +104,11 @@ pred canTransition[pre: State, post: State] {
                     // if set contains same cards as the solved set -> remove from gameSets
                     // else pre=post position
                 all s: SetSet| s != solvedSet implies {
-                    s.card1 = solvedSet.card1 or s.card1 = solvedSet.card2 or s.card1 = solvedSet.card3 or
+                    not (s.card1 = solvedSet.card1 or s.card1 = solvedSet.card2 or s.card1 = solvedSet.card3 or
                     s.card2 = solvedSet.card1 or s.card1 = solvedSet.card2 or s.card2 = solvedSet.card3 or
-                    s.card3 = solvedSet.card1 or s.card3 = solvedSet.card2 or s.card3 = solvedSet.card3 implies {
-                        post.gameSets[s] = InDeck
-                    } else {
+                    s.card3 = solvedSet.card1 or s.card3 = solvedSet.card2 or s.card3 = solvedSet.card3) implies {
                         pre.gameSets[s] = post.gameSets[s]
+                        //sets that share common cards with solvedSet will not be added to post state's gameSets
                     }
                 }
                 //preserve all other in-game sets positions 
@@ -160,5 +159,5 @@ run {
     eliminateDuplicateSets
     wellFormedState
     transitionStates
-} for 6 State, exactly 3 SetSet, exactly 15 SetCard
+} for 4 State, exactly 2 SetSet, exactly 15 SetCard
   for {next is linear}
