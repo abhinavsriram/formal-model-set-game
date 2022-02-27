@@ -41,10 +41,13 @@ pred wellFormedState {
 pred initState[s: State] {
     //exactly 12 cards on the game board
     #{c: SetCard| s.gameCards[c] = OnBoard} = 12
+    all c: SetCard | not s.gameCards[c] = OnBoard implies {
+        s.gameCards[c] = InDeck
+    }
     //no cards have been solved
     #{c: SetCard| s.gameCards[c] = Solved} = 0
     //no sets have been solved
-    #{ss: SetSet| s.gameSets[ss]= Solved} = 0
+    #{ss: SetSet| s.gameSets[ss] = Solved} = 0
     //add all solvable sets from the board to gameSets
     all sets: SetSet| s.gameCards[sets.card1] = OnBoard and s.gameCards[sets.card2] = OnBoard and s.gameCards[sets.card3] = OnBoard implies {
         s.gameSets[sets] = OnBoard
@@ -60,7 +63,7 @@ pred finalState[s: State] {
 
 // adds 3 cards to the Board
 pred addThreeCardsToBoard[pre: State, post: State] {
-    some disj c1, c2, c3: SetCard| {
+    some disj c1, c2, c3: SetCard | {
         //move 3 cards from InDeck to OnBoard
         pre.gameCards[c1] = InDeck and post.gameCards[c1] = OnBoard
         pre.gameCards[c2] = InDeck and post.gameCards[c2] = OnBoard
@@ -80,10 +83,18 @@ pred canTransition[pre: State, post: State] {
     #{c: SetCard| pre.gameCards[c] = OnBoard} < 12 and #{c: SetCard| pre.gameCards[c] = InDeck} > 0 implies {
         //add 3 cards from the deck if there are less than 12 cards on the board
         addThreeCardsToBoard[pre, post]
+        //update unsolvedSets
+        all sets: SetSet| post.gameCards[sets.card1] = OnBoard and post.gameCards[sets.card2] = OnBoard and post.gameCards[sets.card3] = OnBoard implies {
+            post.gameSets[sets] = OnBoard
+        }
     } else {
         #{unsolvedSet: SetSet| pre.gameSets[unsolvedSet] = OnBoard} = 0 implies {
             //add 3 cards from the deck if there are no possible sets on the board
             addThreeCardsToBoard[pre, post]
+            //update unsolvedSets
+            all sets: SetSet| post.gameCards[sets.card1] = OnBoard and post.gameCards[sets.card2] = OnBoard and post.gameCards[sets.card3] = OnBoard implies {
+                post.gameSets[sets] = OnBoard
+            }
         } else {
             //move a set (3 cards) from OnBoard to Solved
             some solvedSet: SetSet | {
@@ -121,9 +132,14 @@ pred canTransition[pre: State, post: State] {
                 all c: SetCard| c != solvedSet.card1 and c != solvedSet.card2 and c != solvedSet.card3 implies {
                     pre.gameCards[c] = post.gameCards[c]
                 }
+                //update unsolvedSets
+                all sets: SetSet| post.gameCards[sets.card1] = OnBoard and post.gameCards[sets.card2] = OnBoard and post.gameCards[sets.card3] = OnBoard implies {
+                    post.gameSets[sets] = OnBoard
+                }
             }
         }
     }
+    
     // if there are less than 12 cards on the board 
     // then add 3 more
     //else 
@@ -159,5 +175,5 @@ run {
     eliminateDuplicateSets
     wellFormedState
     transitionStates
-} for 4 State, exactly 2 SetSet, exactly 15 SetCard
+} for 6 State, exactly 4 SetSet, exactly 21 SetCard
   for {next is linear}
