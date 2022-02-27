@@ -29,8 +29,8 @@ sig SetCard {
     shape: one Shape,
     color: one Color,
     num: one Num,
-    shading: one Shading,
-    position: one Position
+    shading: one Shading//,
+    // position: one Position
 }
 
 sig SetSet {
@@ -115,7 +115,7 @@ pred eliminateDuplicateSets {
 //     {
 //         validDeck
 //         generateValidSet
-//         ensureUniqueSets
+//         // ensureUniqueSets
 //         eliminateDuplicateSets
 //         all sc: SetCard | {
 //             sc.position = OnBoard

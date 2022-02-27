@@ -7,9 +7,9 @@ pred generateValidOnlineGame {
     generateValidSet
     ensureUniqueSets
     eliminateDuplicateSets
-    all sc: SetCard | {
-        sc.position = OnBoard
-    }
+    // all sc: SetCard | {
+    //     sc.position = OnBoard
+    // }
 }
 
 // write something in the visualizer that shows what the 6 sets are
