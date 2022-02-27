@@ -29,6 +29,10 @@ pred wellFormedState {
                     )
             }
         }
+        //update unsolvedSets
+        all sets: SetSet| s.gameCards[sets.card1] = OnBoard and s.gameCards[sets.card2] = OnBoard and s.gameCards[sets.card3] = OnBoard implies {
+            s.gameSets[sets] = OnBoard
+        }
         //cards in a set follow set's position
         // all sets: SetSet| s.gameSets[sets] = OnBoard or s.gameSets[sets] = Solved implies {
         //     s.gameCards[sets.card1] = s.gameSets[sets]
@@ -83,18 +87,10 @@ pred canTransition[pre: State, post: State] {
     #{c: SetCard| pre.gameCards[c] = OnBoard} < 12 and #{c: SetCard| pre.gameCards[c] = InDeck} > 0 implies {
         //add 3 cards from the deck if there are less than 12 cards on the board
         addThreeCardsToBoard[pre, post]
-        //update unsolvedSets
-        all sets: SetSet| post.gameCards[sets.card1] = OnBoard and post.gameCards[sets.card2] = OnBoard and post.gameCards[sets.card3] = OnBoard implies {
-            post.gameSets[sets] = OnBoard
-        }
     } else {
         #{unsolvedSet: SetSet| pre.gameSets[unsolvedSet] = OnBoard} = 0 implies {
             //add 3 cards from the deck if there are no possible sets on the board
             addThreeCardsToBoard[pre, post]
-            //update unsolvedSets
-            all sets: SetSet| post.gameCards[sets.card1] = OnBoard and post.gameCards[sets.card2] = OnBoard and post.gameCards[sets.card3] = OnBoard implies {
-                post.gameSets[sets] = OnBoard
-            }
         } else {
             //move a set (3 cards) from OnBoard to Solved
             some solvedSet: SetSet | {
@@ -131,10 +127,6 @@ pred canTransition[pre: State, post: State] {
                 //cards stay in place if they are not part of the moving/solved set
                 all c: SetCard| c != solvedSet.card1 and c != solvedSet.card2 and c != solvedSet.card3 implies {
                     pre.gameCards[c] = post.gameCards[c]
-                }
-                //update unsolvedSets
-                all sets: SetSet| post.gameCards[sets.card1] = OnBoard and post.gameCards[sets.card2] = OnBoard and post.gameCards[sets.card3] = OnBoard implies {
-                    post.gameSets[sets] = OnBoard
                 }
             }
         }

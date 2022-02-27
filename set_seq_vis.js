@@ -188,6 +188,34 @@ function createSolvedSets(state) {
     return setsDiv
 }
 
+function createUnsolvedSets(state) {
+    setsDiv = document.createElement("div")
+    setsDiv.style.display = "flex"
+    setsDiv.style['flex-direction'] = "column"
+    setsDiv.style.overflow = "scroll"
+    setsDiv.style.width = "290px"
+    setsDiv.style.height = "300px"
+    setsDiv.style.border = "thick solid black"
+    setsDiv.style.margin = "5px"
+    setsDiv.innerHTML = "<h1> Unsolved Sets </h1>"
+    for (const ind in state.join(gameSets).join(OnBoard).tuples()) {
+        setDiv = document.createElement("div")
+        setDiv.style.display = "flex"
+        setDiv.style.height = "60px"
+        setDiv.style.width = "270px"
+        setDiv.style['flex-direction'] = "row"
+        setDiv.style.border = "thin solid black"
+        setDiv.style.margin = "5px"
+        // setDiv.innerHTML = "Set " + ind
+        const set = state.join(gameSets).join(OnBoard).tuples()[ind]
+        setDiv.append(makeCard(set.join(card1)))
+        setDiv.append(makeCard(set.join(card2)))
+        setDiv.append(makeCard(set.join(card3)))
+        setsDiv.append(setDiv)
+    }
+    return setsDiv
+}
+
 function createStateDiv(state) {
     divCont = document.createElement("div")
     divCont.style.display = "flex"
@@ -196,6 +224,7 @@ function createStateDiv(state) {
     divCont.append(createDeck(state))
     divCont.append(createBoard(state))
     divCont.append(createSolvedSets(state))
+    divCont.append(createUnsolvedSets(state))
     return divCont
 }
 
