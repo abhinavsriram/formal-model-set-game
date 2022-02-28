@@ -70,7 +70,6 @@ function makeCardDiv() {
     return card
 }
 
-
 function convStrToInNum(n) {
     if (n == "One") {
         return 1

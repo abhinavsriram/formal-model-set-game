@@ -70,7 +70,6 @@ function makeCardDiv() {
     return card
 }
 
-
 function convStrToInNum(n) {
     if (n == "One") {
         return 1
@@ -265,50 +264,5 @@ function createStates() {
     }
 }
 
-totalStates = 10 //change
-currentState = 0
-
-function nextState() {
-    if (currentState < totalStates) {
-        currentState += 1
-    }
-    stateCounter.innerHTML = "State: " + currentState + "/" + totalStates
-}
-
-function prevState() {
-    if (currentState > 0) {
-        currentState -= 1
-    }
-    stateCounter.innerHTML = "State: " + currentState + "/" + totalStates
-}
-
-function loadState() {
-
-}
-
 div.replaceChildren()
-stateCounter = document.createElement("h1")
-stateCounter.innerHTML = "State: " + currentState + "/" + totalStates
-
-prevButton = document.createElement("button")
-prevButton.innerText = "Prev"
-prevButton.style.width = "45px"
-prevButton.style.height = "20px"
-prevButton.style.backgroundColor = "green"
-prevButton.style.margin = "5px"
-prevButton.addEventListener("click", prevState);
-
-nextButton = document.createElement("button")
-nextButton.innerText = "Next"
-nextButton.style.width = "45px"
-nextButton.style.height = "20px"
-nextButton.style.backgroundColor = "green"
-nextButton.style.margin = "5px"
-nextButton.addEventListener("click", nextState);
-
-div.append(nextButton)
-div.append(prevButton)
-div.append(stateCounter)
 createStates()
-// loadDeck()
-// loadSets()
