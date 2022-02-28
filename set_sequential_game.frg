@@ -109,7 +109,6 @@ pred canTransition[pre: State, post: State] {
                 post.gameCards[solvedSet.card1] = Solved
                 post.gameCards[solvedSet.card2] = Solved
                 post.gameCards[solvedSet.card3] = Solved
-
                 // remove all other sets on the board that contains cards of solvedSet
                 // if set contains same cards as the solved set -> remove from gameSets
                 all s: SetSet | s != solvedSet implies {
@@ -159,7 +158,7 @@ pred transitionStates {
 // note: this seems to run reasonably fast upto the following configuration:
 // 8 State, exactly 4 SetSet, exactly 21 SetCard
 // anything beyond this takes way too long so it was hard to verify if properties held as expected
-// but a simulation of the real life sequential game would be with 81 SetCards
+// but a simulation of the real life sequential game would be with 81 SetCard
 
 // produces a valid sequential game board
 run {
