@@ -158,7 +158,7 @@ pred transitionStates {
 // note: this seems to run reasonably fast upto the following configuration:
 // 8 State, exactly 4 SetSet, exactly 21 SetCard
 // anything beyond this takes way too long so it was hard to verify if properties held as expected
-// but a simulation of the real life sequential game would be with 81 SetCard
+// but a simulation of the real life sequential game would be with 81 SetCards
 
 // produces a valid sequential game board
 run {
