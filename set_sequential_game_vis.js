@@ -1,3 +1,5 @@
+// visualizer script for the sequential real life set game
+
 function makeShape(shape, color, shading) {
     if (shape == "Diamond") {
         return makeDiamond(color, shading)
@@ -123,6 +125,7 @@ function loadSets() {
     setsDiv.style.border = "thick solid black"
     setsDiv.style.margin = "5px"
     setsDiv.innerHTML = "<h1> Set Solutions </h1>"
+
     for (const ind in sets.tuples()) {
         setDiv = document.createElement("div")
         setDiv.style.display = "flex"
@@ -131,7 +134,6 @@ function loadSets() {
         setDiv.style['flex-direction'] = "row"
         setDiv.style.border = "thin solid black"
         setDiv.style.margin = "5px"
-        // setDiv.innerHTML = "Set " + ind
         const set = sets.tuples()[ind]
         setDiv.append(makeCard(set.join(card1)))
         setDiv.append(makeCard(set.join(card2)))
@@ -142,7 +144,6 @@ function loadSets() {
 }
 
 function createBoard(state) {
-    // const cards = SetCard
     boardDiv = document.createElement("div")
     boardDiv.style.display = "flex"
     boardDiv.style['flex-direction'] = "row"
@@ -152,7 +153,7 @@ function createBoard(state) {
     boardDiv.style.height = "300px"
     boardDiv.style.border = "thick solid black"
     boardDiv.style.margin = "5px"
-    // boardDiv.innerHTML = "<h1> Deck </h1> <br>"
+
     for (const ind in state.join(gameCards).join(OnBoard).tuples()) {
         const card = state.join(gameCards).join(OnBoard).tuples()[ind]
         boardDiv.append(makeCard(card))
@@ -178,7 +179,7 @@ function createSolvedSets(state) {
         setDiv.style['flex-direction'] = "row"
         setDiv.style.border = "thin solid black"
         setDiv.style.margin = "5px"
-        // setDiv.innerHTML = "Set " + ind
+
         const set = state.join(gameSets).join(Solved).tuples()[ind]
         setDiv.append(makeCard(set.join(card1)))
         setDiv.append(makeCard(set.join(card2)))
@@ -206,8 +207,36 @@ function createUnsolvedSets(state) {
         setDiv.style['flex-direction'] = "row"
         setDiv.style.border = "thin solid black"
         setDiv.style.margin = "5px"
-        // setDiv.innerHTML = "Set " + ind
+
         const set = state.join(gameSets).join(OnBoard).tuples()[ind]
+        setDiv.append(makeCard(set.join(card1)))
+        setDiv.append(makeCard(set.join(card2)))
+        setDiv.append(makeCard(set.join(card3)))
+        setsDiv.append(setDiv)
+    }
+    return setsDiv
+}
+
+function createUniversalSets(state) {
+    setsDiv = document.createElement("div")
+    setsDiv.style.display = "flex"
+    setsDiv.style['flex-direction'] = "column"
+    setsDiv.style.overflow = "scroll"
+    setsDiv.style.width = "290px"
+    setsDiv.style.height = "300px"
+    setsDiv.style.border = "thick solid black"
+    setsDiv.style.margin = "5px"
+    setsDiv.innerHTML = "<h1> Universal Sets </h1>"
+    for (const ind in SetSet.tuples()) {
+        setDiv = document.createElement("div")
+        setDiv.style.display = "flex"
+        setDiv.style.height = "60px"
+        setDiv.style.width = "270px"
+        setDiv.style['flex-direction'] = "row"
+        setDiv.style.border = "thin solid black"
+        setDiv.style.margin = "5px"
+
+        const set = SetSet.tuples()[ind]
         setDiv.append(makeCard(set.join(card1)))
         setDiv.append(makeCard(set.join(card2)))
         setDiv.append(makeCard(set.join(card3)))
@@ -225,6 +254,7 @@ function createStateDiv(state) {
     divCont.append(createBoard(state))
     divCont.append(createSolvedSets(state))
     divCont.append(createUnsolvedSets(state))
+    divCont.append(createUniversalSets(state))
     return divCont
 }
 

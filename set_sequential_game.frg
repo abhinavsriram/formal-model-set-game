@@ -2,6 +2,11 @@
 
 open "set_common.frg"
 
+abstract sig Position {}
+one sig OnBoard extends Position {}
+one sig InDeck extends Position {}
+one sig Solved extends Position {}
+
 sig State {
     gameCards: pfunc SetCard -> Position,
     gameSets: pfunc SetSet -> Position,
@@ -10,15 +15,7 @@ sig State {
 
 pred wellFormedState {
     all s: State | {
-        //# of cards in each position is a multiple of 3 (probably not necessary)
-        // divide[#{c: SetCard| c.position = InDeck}, 3] = 0
-        // divide[#{c: SetCard| c.position = OnBoard}, 3] = 0
-        // divide[#{c: SetCard| c.position = Solved}, 3] = 0
-        // all solvedSet: SetSet| some i: Int| s.solvedSets[i] = solvedSet implies {
-
-        // all ss: SetSet| s.gameSets[ss] = OnBoard or s.gameSets[ss] = Solved
-
-        
+        // no card from a solved set is used in an unsolved set
         all solvedSet: SetSet| s.gameSets[solvedSet] = Solved implies {
             all unsolvedSet: SetSet| s.gameSets[unsolvedSet] = OnBoard implies {
                 not
@@ -29,11 +26,14 @@ pred wellFormedState {
                     )
             }
         }
-        //update unsolvedSets
+        // if a set's cards are on the board then the set is on the board
         all sets: SetSet| s.gameCards[sets.card1] = OnBoard and s.gameCards[sets.card2] = OnBoard and s.gameCards[sets.card3] = OnBoard implies {
             s.gameSets[sets] = OnBoard
         }
-        //cards in a set follow set's position
+        all sets: SetSet | some s.gameSets[sets] implies {
+            s.gameSets[sets] = OnBoard or s.gameSets[sets] = Solved
+        }
+        // cards in a set follow set's position
         // all sets: SetSet| s.gameSets[sets] = OnBoard or s.gameSets[sets] = Solved implies {
         //     s.gameCards[sets.card1] = s.gameSets[sets]
         //     s.gameCards[sets.card2] = s.gameSets[sets]
@@ -93,7 +93,7 @@ pred canTransition[pre: State, post: State] {
             addThreeCardsToBoard[pre, post]
         } else {
             //move a set (3 cards) from OnBoard to Solved
-            some solvedSet: SetSet | {
+            some solvedSet: SetSet| {
                 //moved solvedSet from OnBoard to Solved
                 pre.gameSets[solvedSet] = OnBoard
                 post.gameSets[solvedSet] = Solved
@@ -165,7 +165,8 @@ run {
     generateValidSet
     ensureUniqueSets
     eliminateDuplicateSets
+    // setsShareNoCard
     wellFormedState
     transitionStates
-} for 6 State, exactly 4 SetSet, exactly 21 SetCard
+} for 4 State, exactly 2 SetSet, exactly 15 SetCard
   for {next is linear}

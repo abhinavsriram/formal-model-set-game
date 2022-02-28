@@ -1,3 +1,5 @@
+// visualizer script for the online set game
+
 function makeShape(shape, color, shading) {
     if (shape == "Diamond") {
         return makeDiamond(color, shading)
@@ -79,18 +81,31 @@ function convStrToInNum(n) {
     }
 }
 
+function gameBoardHeader() {
+    gameBoardHeaderDiv = document.createElement("div")
+    gameBoardHeaderDiv.style.display = "flex"
+    gameBoardHeaderDiv.style['flex-direction'] = "column"
+    gameBoardHeaderDiv.style['flex-wrap'] = "wrap"
+    gameBoardHeaderDiv.style.overflow = "scroll"
+    gameBoardHeaderDiv.style.width = "290px"
+    gameBoardHeaderDiv.style.height = "35px"
+    gameBoardHeaderDiv.style.border = "thick solid black"
+    gameBoardHeaderDiv.style.margin = "5px"
+    gameBoardHeaderDiv.innerHTML = "<h1> Game Board </h1>"
+    div.append(gameBoardHeaderDiv)
+}
+
 function loadCards() {
     const cards = SetCard
     cardsDiv = document.createElement("div")
     cardsDiv.style.display = "flex"
-    cardsDiv.style['flex-direction'] = "row"
+    cardsDiv.style['flex-direction'] = "column"
     cardsDiv.style['flex-wrap'] = "wrap"
     cardsDiv.style.overflow = "scroll"
-    cardsDiv.style.width = "370px"
-    cardsDiv.style.height = "300px"
+    cardsDiv.style.width = "290px"
+    cardsDiv.style.height = "250px"
     cardsDiv.style.border = "thick solid black"
     cardsDiv.style.margin = "5px"
-    // cardsDiv.innerHTML = "<h1> All Cards </h1> <br>"
     for (const ind in cards.tuples()) {
         const card = cards.tuples()[ind]
         cardsDiv.append(makeCard(card))
@@ -111,18 +126,30 @@ function makeCard(card) {
     return newCard
 }
 
+function solutionBoardHeader() {
+    solutionBoardHeaderDiv = document.createElement("div")
+    solutionBoardHeaderDiv.style.display = "flex"
+    solutionBoardHeaderDiv.style['flex-direction'] = "column"
+    solutionBoardHeaderDiv.style['flex-wrap'] = "wrap"
+    solutionBoardHeaderDiv.style.overflow = "scroll"
+    solutionBoardHeaderDiv.style.width = "290px"
+    solutionBoardHeaderDiv.style.height = "35px"
+    solutionBoardHeaderDiv.style.border = "thick solid black"
+    solutionBoardHeaderDiv.style.margin = "5px"
+    solutionBoardHeaderDiv.innerHTML = "<h1> Sets Present in Above Game Board </h1>"
+    div.append(solutionBoardHeaderDiv)
+}
+
 function loadSets() {
-    const cards = SetCard
     const sets = SetSet
     setsDiv = document.createElement("div")
     setsDiv.style.display = "flex"
     setsDiv.style['flex-direction'] = "column"
     setsDiv.style.overflow = "scroll"
-    setsDiv.style.width = "370px"
+    setsDiv.style.width = "290px"
     setsDiv.style.height = "300px"
     setsDiv.style.border = "thick solid black"
     setsDiv.style.margin = "5px"
-    setsDiv.innerHTML = "<h1> Set Solutions </h1>"
     for (const ind in sets.tuples()) {
         setDiv = document.createElement("div")
         setDiv.style.display = "flex"
@@ -131,7 +158,6 @@ function loadSets() {
         setDiv.style['flex-direction'] = "row"
         setDiv.style.border = "thin solid black"
         setDiv.style.margin = "5px"
-        // setDiv.innerHTML = "Set " + ind
         const set = sets.tuples()[ind]
         setDiv.append(makeCard(set.join(card1)))
         setDiv.append(makeCard(set.join(card2)))
@@ -142,5 +168,7 @@ function loadSets() {
 }
 
 div.replaceChildren()
+gameBoardHeader()
 loadCards()
+solutionBoardHeader()
 loadSets()
