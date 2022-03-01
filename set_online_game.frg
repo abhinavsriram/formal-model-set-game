@@ -16,8 +16,7 @@ run {
 
 // you can have a maximum of 12 sets with 12 cards
 test expect {
-    {
+    validOnlineGame: {
         generateValidOnlineGame
-    }
-    for exactly 13 SetSet, exactly 12 SetCard is unsat
+    } for exactly 13 SetSet, exactly 12 SetCard is unsat
 }
