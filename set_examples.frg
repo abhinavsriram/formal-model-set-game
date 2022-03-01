@@ -4,6 +4,7 @@ open "set_common.frg"
 open "set_online_game.frg"
 open "set_sequential_game.frg"
 
+// a past solved game from https://www.setgame.com/set/puzzle
 example validOnlineGame is generateValidOnlineGame for {
     SetCard = `CARD1 + `CARD2 + `CARD3 + `CARD4 + `CARD5 + `CARD6 + `CARD7 + `CARD8 + `CARD9 + `CARD10 + `CARD11 + `CARD12
     Diamond = `DIAMOND
@@ -98,7 +99,7 @@ example validOnlineGame is generateValidOnlineGame for {
     `SET6 -> `CARD11
 }
 
-//12 SetCard, 3 SetSet
+// 12 SetCard, 3 SetSet
 // 2 sets are unsolved, 1 set is solved
 example validState is wellFormedState for {
     SetCard = `CARD1 + `CARD2 + `CARD3 + `CARD4 + `CARD5 + `CARD6 + `CARD7 + `CARD8 + `CARD9 + `CARD10 + `CARD11 + `CARD12
@@ -183,13 +184,11 @@ example validState is wellFormedState for {
     `SET1 -> `CARD3 +
     `SET2 -> `CARD6 +
     `SET3 -> `CARD9
-
     State = `STATE
     OnBoard = `ONBOARD
     InDeck = `INDECK
     Solved = `SOLVED
     Position = OnBoard + InDeck + Solved
-
     gameCards = `STATE -> `CARD1 -> `ONBOARD +
                 `STATE -> `CARD2 -> `ONBOARD +
                 `STATE -> `CARD3 -> `ONBOARD +
@@ -207,9 +206,9 @@ example validState is wellFormedState for {
                 `STATE -> `SET3 -> `SOLVED 
 }
 
-//12 SetCard, 3 SetSet
+// 12 SetCard, 3 SetSet
 // 2 sets are unsolved, 1 set is solved
-// card positions do no follow set positions
+// card positions do not follow set positions
 example invalidState is not wellFormedState for {
     SetCard = `CARD1 + `CARD2 + `CARD3 + `CARD4 + `CARD5 + `CARD6 + `CARD7 + `CARD8 + `CARD9 + `CARD10 + `CARD11 + `CARD12
     Diamond = `DIAMOND
@@ -293,13 +292,11 @@ example invalidState is not wellFormedState for {
     `SET1 -> `CARD3 +
     `SET2 -> `CARD6 +
     `SET3 -> `CARD9
-
     State = `STATE
     OnBoard = `ONBOARD
     InDeck = `INDECK
     Solved = `SOLVED
     Position = OnBoard + InDeck + Solved
-
     gameCards = `STATE -> `CARD1 -> `ONBOARD +
                 `STATE -> `CARD2 -> `ONBOARD +
                 `STATE -> `CARD3 -> `ONBOARD +

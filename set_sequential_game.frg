@@ -9,7 +9,6 @@ one sig OnBoard extends Position {}
 one sig InDeck extends Position {}
 one sig Solved extends Position {}
 
-// add fields that are dependent on each frame:
 // the gameCards pfunc maps cards to positions
 // the gameSets pfunc maps sets to positions
 // the next field points to the next State
@@ -103,7 +102,7 @@ pred canTransition[pre: State, post: State] {
                 // move solvedSet from OnBoard to Solved
                 pre.gameSets[solvedSet] = OnBoard
                 post.gameSets[solvedSet] = Solved
-                //move cards in the solvedSet from OnBoard to Solved
+                // move cards in the solvedSet from OnBoard to Solved
                 pre.gameCards[solvedSet.card1] = OnBoard
                 pre.gameCards[solvedSet.card2] = OnBoard
                 pre.gameCards[solvedSet.card3] = OnBoard
@@ -111,7 +110,7 @@ pred canTransition[pre: State, post: State] {
                 post.gameCards[solvedSet.card2] = Solved
                 post.gameCards[solvedSet.card3] = Solved
                 // remove all other sets on the board that contains cards of solvedSet
-                // if set contains same cards as the solved set -> remove from gameSets
+                // if a set contains same cards as the solved set -> remove from gameSets
                 all s: SetSet | s != solvedSet implies {
                     not 
                     (
@@ -120,8 +119,8 @@ pred canTransition[pre: State, post: State] {
                         s.card3 = solvedSet.card1 or s.card3 = solvedSet.card2 or s.card3 = solvedSet.card3
                     ) 
                     implies {
+                        // sets that share common cards with solvedSet will not be added to the post state's gameSets
                         pre.gameSets[s] = post.gameSets[s]
-                        // sets that share common cards with solvedSet will not be added to post state's gameSets
                     }
                 }
                 // cards stay in place if they are not part of the moving/solved set
@@ -168,8 +167,7 @@ run {
     setsShareNoCard
     wellFormedState
     transitionStates
-    ensureUniqueSets
 } for 8 State, exactly 4 SetSet, exactly 21 SetCard
   for {next is linear}
   // use set_sequential_game_vis.js!
-  // NOTE: for better viewing, zoom out (CTRL -) until each state takes up a single row!
+  // NOTE: for better viewing, zoom out (CTRL/CMD -) until each state takes up a single row!

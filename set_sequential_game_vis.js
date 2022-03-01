@@ -277,7 +277,6 @@ function createStates() {
     scrollableStates.style.overflow = "scroll"
     scrollableStates.style.width = "100%"
     scrollableStates.style.height = "1500px"
-    // scrollableStates.style.backgroundColor = "red"
     scrollableStates.style.margin = "5px"
     for (const ind in State.tuples()) {
         const state = State.tuples()[ind]
