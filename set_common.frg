@@ -127,6 +127,14 @@ pred generateValidDeck {
     }
 }
 
+// test expect {
+//     {
+//         generateValidDeck
+//         generateValidSet
+//     }
+//     for exactly 1080 SetSet, exactly 81 SetCard is sat
+// }
+
 // note: the following tests don't run because they are too large
 
 // validate that there are 1080 unique sets in a valid deck

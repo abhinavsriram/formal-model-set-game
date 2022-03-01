@@ -173,3 +173,36 @@ run {
   for {next is linear}
   // use set_sequential_game_vis.js!
   // NOTE: for better viewing, zoom out (CTRL -) until each state takes up a single row!
+
+// test expect {
+//     validSequence: {
+//         generateValidDeck
+//         generateValidSet
+//         setsShareNoCard
+//         wellFormedState
+//         transitionStates
+//         ensureUniqueSets
+//     } for 8 State, exactly 4 SetSet, exactly 21 SetCard for {next is linear} is sat
+
+//     // the game requires to solve all sets and get rid of all cards in the deck
+//     // Thus, number of states should at least be (#SetSet + (#SetCard - 12)/3)
+//     tooLittleStates: {
+//         generateValidDeck
+//         generateValidSet
+//         setsShareNoCard
+//         wellFormedState
+//         transitionStates
+//         ensureUniqueSets
+//     } for 2 State, exactly 2 SetSet, exactly 15 SetCard for {next is linear} is unsat
+
+//     // The game requires there to be at least 12 SetCards. 
+//     // If so, the number of cards should at least be at least #SetSet*3
+//     tooLittleCards: {
+//         generateValidDeck
+//         generateValidSet
+//         setsShareNoCard
+//         wellFormedState
+//         transitionStates
+//         ensureUniqueSets
+//     } for 4 State, exactly 5 SetSet, exactly 12 SetCard for {next is linear} is unsat
+// }
