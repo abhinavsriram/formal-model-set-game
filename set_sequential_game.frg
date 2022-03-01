@@ -9,6 +9,7 @@ one sig OnBoard extends Position {}
 one sig InDeck extends Position {}
 one sig Solved extends Position {}
 
+// add fields that are dependent on each frame:
 // the gameCards pfunc maps cards to positions
 // the gameSets pfunc maps sets to positions
 // the next field points to the next State
@@ -167,5 +168,8 @@ run {
     setsShareNoCard
     wellFormedState
     transitionStates
+    ensureUniqueSets
 } for 8 State, exactly 4 SetSet, exactly 21 SetCard
   for {next is linear}
+  // use set_sequential_game_vis.js!
+  // NOTE: for better viewing, zoom out (CTRL -) until each state takes up a single row!

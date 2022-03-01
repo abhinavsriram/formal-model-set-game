@@ -12,3 +12,4 @@ pred generateValidOnlineGame {
 run {
     generateValidOnlineGame
 } for exactly 6 SetSet, exactly 12 SetCard
+// use set_online_game_vis.js!

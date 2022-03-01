@@ -88,7 +88,7 @@ function createDeck(state) {
     cardsDiv.style.overflow = "scroll"
     cardsDiv.style.width = "100px"
     cardsDiv.style.height = "300px"
-    cardsDiv.style.border = "thick solid black"
+    cardsDiv.style.border = "medium solid black"
     cardsDiv.style.margin = "5px"
     cardsDiv.innerHTML = "<h1> Deck </h1> <br>"
 
@@ -121,7 +121,7 @@ function loadSets() {
     setsDiv.style.overflow = "scroll"
     setsDiv.style.width = "370px"
     setsDiv.style.height = "300px"
-    setsDiv.style.border = "thick solid black"
+    setsDiv.style.border = "medium solid black"
     setsDiv.style.margin = "5px"
     setsDiv.innerHTML = "<h1> Set Solutions </h1>"
 
@@ -143,21 +143,26 @@ function loadSets() {
 }
 
 function createBoard(state) {
+    container = document.createElement("div")
+    container.innerHTML = "<h1> Board </h1>"
+    container.style.width = "300px"
+    container.style.height = "300px"
+    container.style.border = "medium solid black"
+    container.style.margin = "5px"
+    container.style.display = "flex"
+    container.style['flex-direction'] = "column"
     boardDiv = document.createElement("div")
+    container.append(boardDiv)
     boardDiv.style.display = "flex"
     boardDiv.style['flex-direction'] = "row"
     boardDiv.style['flex-wrap'] = "wrap"
     boardDiv.style.overflow = "scroll"
-    boardDiv.style.width = "300px"
-    boardDiv.style.height = "300px"
-    boardDiv.style.border = "thick solid black"
-    boardDiv.style.margin = "5px"
 
     for (const ind in state.join(gameCards).join(OnBoard).tuples()) {
         const card = state.join(gameCards).join(OnBoard).tuples()[ind]
         boardDiv.append(makeCard(card))
     }
-    return boardDiv
+    return container
 }
 
 function createSolvedSets(state) {
@@ -167,7 +172,7 @@ function createSolvedSets(state) {
     setsDiv.style.overflow = "scroll"
     setsDiv.style.width = "290px"
     setsDiv.style.height = "300px"
-    setsDiv.style.border = "thick solid black"
+    setsDiv.style.border = "medium solid black"
     setsDiv.style.margin = "5px"
     setsDiv.innerHTML = "<h1> Solved Sets </h1>"
     for (const ind in state.join(gameSets).join(Solved).tuples()) {
@@ -195,9 +200,9 @@ function createUnsolvedSets(state) {
     setsDiv.style.overflow = "scroll"
     setsDiv.style.width = "290px"
     setsDiv.style.height = "300px"
-    setsDiv.style.border = "thick solid black"
+    setsDiv.style.border = "medium solid black"
     setsDiv.style.margin = "5px"
-    setsDiv.innerHTML = "<h1> Unsolved Sets </h1>"
+    setsDiv.innerHTML = "<h1> Sets to solve on the board </h1>"
     for (const ind in state.join(gameSets).join(OnBoard).tuples()) {
         setDiv = document.createElement("div")
         setDiv.style.display = "flex"
@@ -223,9 +228,10 @@ function createUniversalSets(state) {
     setsDiv.style.overflow = "scroll"
     setsDiv.style.width = "290px"
     setsDiv.style.height = "300px"
-    setsDiv.style.border = "thick solid black"
+    setsDiv.style.border = "medium solid black"
     setsDiv.style.margin = "5px"
-    setsDiv.innerHTML = "<h1> Universal Sets </h1>"
+    const numSet = SetSet.tuples().length
+    setsDiv.innerHTML = "<h1> The " + numSet + " total sets to solve</h1>"
     for (const ind in SetSet.tuples()) {
         setDiv = document.createElement("div")
         setDiv.style.display = "flex"
@@ -245,6 +251,14 @@ function createUniversalSets(state) {
 }
 
 function createStateDiv(state) {
+    outCont = document.createElement("div")
+    outCont.innerHTML = "<h1> " + state.toString() + "</h1>"
+    outCont.style.display = "flex"
+    outCont.style.display = "flex"
+    outCont.style['flex-direction'] = "column"
+    outCont.style.margin = "20px 5px"
+    outCont.style.border = "thin solid black"
+
     divCont = document.createElement("div")
     divCont.style.display = "flex"
     divCont.style['flex-direction'] = "row"
@@ -254,14 +268,22 @@ function createStateDiv(state) {
     divCont.append(createSolvedSets(state))
     divCont.append(createUnsolvedSets(state))
     divCont.append(createUniversalSets(state))
-    return divCont
+    outCont.append(divCont)
+    return outCont
 }
 
 function createStates() {
+    scrollableStates = document.createElement("div")
+    scrollableStates.style.overflow = "scroll"
+    scrollableStates.style.width = "100%"
+    scrollableStates.style.height = "1500px"
+    // scrollableStates.style.backgroundColor = "red"
+    scrollableStates.style.margin = "5px"
     for (const ind in State.tuples()) {
         const state = State.tuples()[ind]
-        div.append(createStateDiv(state))
+        scrollableStates.append(createStateDiv(state))
     }
+    div.append(scrollableStates)
 }
 
 div.replaceChildren()

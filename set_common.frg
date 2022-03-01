@@ -32,7 +32,7 @@ sig SetCard {
     shading: one Shading
 }
 
-// sig to represent a set in the game of Set
+// sig to represent a set to solve in the game of Set
 sig SetSet {
     card1: one SetCard,
     card2: one SetCard,
@@ -75,6 +75,7 @@ pred validSet[sc1: SetCard, sc2: SetCard, sc3: SetCard] {
 }
 
 // ensures all sets are unique
+// applicable for sequential game not for the online game
 pred ensureUniqueSets {
     all disj se1, se2: SetSet | {
         se1.card1 != se2.card1 and se1.card2 != se2.card2 and se1.card3 != se2.card3
@@ -109,9 +110,8 @@ pred setsShareNoCard {
 // ensures all sets are valid
 pred generateValidSet {
     all se: SetSet | {
-        se.card1 != se.card2 and se.card2 != se.card3 and se.card1 != se.card3 and
+        se.card1 != se.card2 and se.card2 != se.card3 and se.card1 != se.card3
         validSet[se.card1, se.card2, se.card3]
-        ensureUniqueSets
         eliminateDuplicateSets
     }
 }
