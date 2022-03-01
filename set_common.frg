@@ -74,13 +74,6 @@ pred validSet[sc1: SetCard, sc2: SetCard, sc3: SetCard] {
     validShadings[sc1, sc2, sc3]
 }
 
-// ensures all sets are unique
-pred ensureUniqueSets {
-    all disj se1, se2: SetSet | {
-        se1.card1 != se2.card1 and se1.card2 != se2.card2 and se1.card3 != se2.card3
-    }
-}
-
 // ensures different combinations of same set are eliminated
 pred eliminateDuplicateSets {
     all disj se1, se2: SetSet | {
@@ -90,6 +83,13 @@ pred eliminateDuplicateSets {
             (se1.card2 = se2.card1 or se1.card2 = se2.card2 or se1.card2 = se2.card3) and
             (se1.card3 = se2.card1 or se1.card3 = se2.card2 or se1.card3 = se2.card3)
         )
+    }
+}
+
+// ensures all sets are unique
+pred ensureUniqueSets {
+    all disj se1, se2: SetSet | {
+        not (se1.card1 = se2.card1 and se1.card2 = se2.card2 and se1.card3 = se2.card3)
     }
 }
 
@@ -153,4 +153,4 @@ pred generateValidDeck {
 // run {
 //     generateValidDeck
 //     generateValidSet
-// } for exactly 1080 SetSet, exactly 81 SetCard
+// } for exactly 81 SetCard

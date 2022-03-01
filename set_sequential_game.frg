@@ -93,6 +93,7 @@ pred canTransition[pre: State, post: State] {
     #{c: SetCard | pre.gameCards[c] = OnBoard} < 12 and #{c: SetCard | pre.gameCards[c] = InDeck} > 2 implies {
         // add 3 cards from the deck if there are less than 12 cards on the board and at least 3 cards in the deck
         addThreeCardsToBoard[pre, post]
+        #{c: SetCard | pre.gameCards[c] = OnBoard} = 12
     } else {
         #{unsolvedSet: SetSet | pre.gameSets[unsolvedSet] = OnBoard} = 0 implies {
             // add 3 cards from the deck if there are no possible sets on the board
